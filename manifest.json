@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Custom New Tab",
-  "version": "1.0",
-  "description": "DashX transforms your new tab into a customizable productivity dashboard with widgets, and various features. Built for focus, speed, and personalization.",
+  "name": "DashX",
+  "version": "v1.0.0.1",
+  "description": "DashX transforms your browser into a customizable productivity dashboard with widgets, and various features. Built for focus, speed, and personalization.",
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
