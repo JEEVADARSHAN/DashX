@@ -1,6 +1,6 @@
 ﻿# DashX
 
-**DashX** is a highly customizable browser extension designed to boost productivity and keep things fun! With a collection of **widgets**, **games**, and **tools**, it transforms your new tab page into a personalized productivity hub.
+**DashX** is a highly customizable browser extension designed to boost productivity and keep things fun! With a collection of **widgets**, **games**, and **tools**, it transforms your browser into a personalized productivity hub.
 
 ## 🚀 Features
 
@@ -25,7 +25,7 @@
 3. Enable **Developer Mode** (top right).
 4. Click **Load unpacked** and select the `DashX-extension` folder.
 
-That's it! Your NewTab extension should now be live.
+That's it! DashX should now be live.
 
 ## 🛠️ Configuration
 
