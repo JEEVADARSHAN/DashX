@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Tab</title>    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="libs/shepherd.css">
+</head>
+<body>
+    <main>
+
+        <!--  SIDEBAR  -->
+        <section>
+            <div id="sideBar" class="sideBar">
+
+                <!--  TOP  -->
+                <div style="display: grid; grid-auto-flow: row; grid-auto-rows: 40px; justify-items: center; ">
+                    <img id="home" class="home" src="assets/sideBar/home.png" />
+                    <label for="toggle-app-drawer" class="icon-wrapper">
+                        <img title="Sites" class="apps" src="assets/sideBar/apps.png" />
+                    </label>
+                    <label for="toggle-analytics-drawer" class="icon-wrapper">
+                        <img title="Analytics" class="analytics" src="assets/sideBar/chart.png" />
+                    </label>
+                </div>
+
+                <!--  BOTTOM -->
+                <div style="border-top: 1px solid var(--font-color); position: relative; width: 100%; display: grid; grid-auto-flow: row; grid-auto-rows: 40px; justify-items: center; padding-top: 12px;">
+                    <label for="toggle-settings-drawer" class="icon-wrapper">
+                        <img title="Settings" class="settings" src="assets/sideBar/settings.png" />
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!--  WIDGET AREA  -->
+        <section>
+            <div id="edit-bar" class="edit-bar glass">
+                <p>Edit Mode</p>
+                <div style="display:flex">
+                    <p id="add">+ Add New Widget</p>
+                    <p id="done">&#10004; Done</p>
+                </div>
+            </div>
+            <div id="widget-area" class="widget-area">
+            </div>
+        </section>
+
+        <!--  DOC  -->
+        <section>
+            <div class="glass app-container" id="app-container"></div>
+        </section>
+
+        <!-- DRAWER -->
+        <section>
+            <div>
+                <input type="checkbox" id="toggle-app-drawer" class="drawer-toggle" hidden>
+                <div class="drawer" id="app-drawer"></div>
+
+                <input type="checkbox" id="toggle-analytics-drawer" class="drawer-toggle" hidden>
+
+                <div class="drawer" id="analytics-drawer1">
+                    <div id="no-data-placeholder" style="display: none; text-align: center; padding: 2em;z-index:1000; position:absolute; top:50%;left:50%;transform:translate(-50%,-50%)">
+                        No tracking data available.
+                    </div>
+                    <div id="tracking-disabled-placeholder" class="glass" style="display:none; padding: 2em; text-align: center; position:fixed; transform:translate(-50%,-50%);top:50%;left:50%;">
+                        <div class="dashboard-header">
+                            <h3>Analytics Tracking is Turned Off</h3>
+                        </div>
+                        <div>
+                            <p>To see your site usage insights, please enable tracking.</p>
+                            <div style="display: flex; align-items: center; gap:10px">
+                                <p>Usage Data: </p>
+                                <label>
+                                    <input style="vertical-align:-6px;" class="toggle-btn" type="checkbox" id="tracking-toggle">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawer" id="analytics-drawer">
+                    <div class="dashboard-header">
+                        <h2>Analytics</h2>
+                        <div id="clear-data-btn" title="Clear all tracking data"><img src="assets/other/delete.png" /></div>
+                    </div>
+                    <hr />
+                    <div class="dashboard-container">
+
+
+                        <div class="glass" style="grid-area: chart">
+                            <div class="chart-card">
+                                <h3>Today’s Usage</h3>
+                                <br>
+                                <!-- Canvas and center time -->
+                                <div class="canvas-wrapper">
+                                    <div class="donut-center-time">
+                                        <p>TODAY</p>
+                                        <p id="donut-center-time">0m 0s</p>
+                                    </div>
+                                    <canvas id="today-pie-chart"></canvas>
+                                </div>
+
+                                <!-- External Legend -->
+                                <div id="chart-legend" class="chart-legend"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="glass summary-details" style="grid-area: summary">
+                            <h3>Today’s Summary</h3>
+                            <div id="today-summary-list" style="display: flex; flex-direction: column; height: 100%; justify-content: space-evenly">
+                                <p class="glass" style="padding:1rem;">Sites Visited: <span id="sites-visited">0</span></p>
+                                <p class="glass" style="padding:1rem;">Avg. Session Duration: <span id="avg-session-duration">0s</span></p>
+                            </div>
+                        </div>
+
+                        <div class="glass chart-card" style="grid-area: week">
+                            <h3>This Week’s Activity</h3>
+                            <canvas id="week-line-chart" width="600" height="300"></canvas>
+                        </div>
+
+                        <div class="glass insight-card" style="grid-area: top; overflow-y:scroll;">
+                            <h3>Longest Session Today</h3>
+                            <canvas id="longest-sessions-chart" height="200"></canvas>
+                        </div>
+
+                        <div class="glass chart-card" style="grid-area: radar">
+                            <h3>Time by Category</h3>
+                            <canvas id="category-radar-chart" height="300"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <input type="checkbox" id="toggle-settings-drawer" class="drawer-toggle" hidden>
+                <div id="settings-drawer" class="drawer">
+                    <div id="settings-nav">
+                        <button data-tab="display" class="active">Display</button>
+                        <button data-tab="layout">Layout</button>
+                        <button data-tab="privacy">Privacy</button>
+                        <button data-tab="about">About</button>
+                    </div>
+
+                    <div id="settings-content">
+                        <div id="tab-display" class="settings-tab active">
+                            <h2>Wallpaper</h2>
+                            <hr />
+                            <div class="items">
+                                <div class="thumb-wrapper">
+                                    <!-- Prebuilt thumbnails -->
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w1.jpg" style="background-image: url('../assets/wallpaper/w1.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w2.jpg" style="background-image: url('../assets/wallpaper/w2.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w3.jpg" style="background-image: url('../assets/wallpaper/w3.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w4.jpg" style="background-image: url('../assets/wallpaper/w4.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w5.jpg" style="background-image: url('../assets/wallpaper/w5.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w6.jpg" style="background-image: url('../assets/wallpaper/w6.jpg')"></div>
+                                    <div class="wallpaper-thumb" data-src="../assets/wallpaper/w7.jpg" style="background-image: url('../assets/wallpaper/w7.jpg')"></div>
+                                </div>
+                            </div>
+                            <div class="items" style="width: 100%">
+                                <div style="width: 100%; display: flex; flex-direction: row; align-items:center; justify-content:space-between">
+                                    Choose your own wallpaper:
+                                    <label class="custom-upload">
+                                        <p>Upload</p>
+                                        <input type="file" id="wallpaper-input" hidden accept="image/*">
+                                    </label>
+                                </div>
+                            </div>
+                            <h2>Color Palette</h2>
+                            <hr />
+                            <div class="items">
+                                <p>Toggle Theme:</p>
+                                <input class="toggle-btn" type="checkbox" id="theme-toggle-btn">
+                            </div>
+                            <div class="items">
+                                <div class="color-swatch" data-color="#ffffff" style="background: #ffffff;"></div>
+                                <div class="color-swatch" data-color="#000000" style="background: #000000;"></div>
+                                <div class="color-swatch" data-color="#1E88E5" style="background: #1E88E5;"></div>
+                                <div class="color-swatch" data-color="#43A047" style="background: #43A047;"></div>
+                                <div class="color-swatch" data-color="#FDD835" style="background: #FDD835;"></div>
+                                <div class="color-swatch" data-color="#E53935" style="background: #E53935;"></div>
+                                <div class="color-swatch" data-color="#8E24AA" style="background: #8E24AA;"></div>
+                                <div class="color-swatch" data-color="#FB8C00" style="background: #FB8C00;"></div>
+                                <div class="color-swatch" data-color="#00ACC1" style="background: #00ACC1;"></div>
+                                <div class="color-swatch" data-color="#EC407A" style="background: #EC407A;"></div>
+                                <div class="color-swatch" data-color="#757575" style="background: #757575;"></div>
+                                <div class="color-swatch" data-color="#6D4C41" style="background: #6D4C41;"></div>
+                                <div class="color-swatch" data-color="#3949AB" style="background: #3949AB;"></div>
+                                <div class="color-swatch" data-color="#00E676" style="background: #00E676;"></div>
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="font-color-picker">
+                                    <div class="color-wheel-preview"></div>
+                                </div>
+
+                            </div>
+
+                            <h2>Visual Effects</h2>
+                            <hr />
+                            <div class="items" style="display: grid;">
+                                <div style="width: 100%;">
+                                    <p>Blur:</p>
+                                    <input type="range" id="blur-range" min="0" max="20" style="width: 100%;">
+                                </div>
+                                <div style="width: 100%;">
+                                    <p>Transparency:</p>
+                                    <input type="range" id="transparency-range" min="0" max="1" step="0.1" style="width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-layout" class="settings-tab">
+                            <h2>Layout</h2>
+                            <hr />
+                            <div>
+                                <div class="items" style="cursor: pointer;">
+                                    <p id="edit">Personalize Your Layout</p>
+                                </div>
+                                <div class="items">
+                                    <p style="cursor:default;">Toggle App Bar Visibility: </p>
+                                    <input class="toggle-btn" type="checkbox" id="app-bar-toggle">
+                                </div>
+                                <div id="appBar-edit" class="items">
+                                    <div style="width: 100%; display: flex; flex-direction: row; justify-content:space-between;">
+                                        <p id="edit-appBar">Customize Your App Bar</p>
+                                        <span id="c-arr" style="float: right;">▼</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-privacy" class="settings-tab">
+                            <h2>Privacy</h2>
+                            <hr />
+                            <div class="items">
+                                <div style="display: flex; flex-direction: row; width:100%; gap:20px;">
+                                    <p>Choose your location (Weather):</p>
+                                    <input id="city-name" type="text" class="todo-input" placeholder="Enter city name..." />
+                                </div>
+                            </div>
+                            <div class="items">
+                                <p>Turn on browsing history:</p>
+                                <input class="toggle-btn" type="checkbox" id="toggle-tracking-consent">
+                            </div>
+                        </div>
+                        <div id="tab-about" class="settings-tab">
+                            <h2>About DashX</h2>
+                            <hr />
+                            <br />
+                            <div class="about-section">
+                                <h3>DashX</h3>
+                                <p><strong>Version:</strong> v1.0.0.1</p>
+
+                                <p>
+                                    DashX transforms your new tab into a sleek, fully configurable dashboard designed to elevate your workflow. More than just aesthetics, it blends powerful productivity tools with intuitive design to help you stay focused, organized, and inspired throughout your day.
+                                </p>
+                                <br />
+                                <h3>Why DashX?</h3>
+                                <p>
+                                    In the modern workspace, digital clutter, scattered tools, and distractions are constant productivity killers. DashX addresses these challenges by consolidating key features in one unified interface:
+                                </p>
+                                <ul>
+                                    <li><strong>Instant Access:</strong> Quickly reach your favorite sites, notes, and widgets in one click.</li>
+                                    <li><strong>Clean & Distraction-Free:</strong> Minimal, elegant layout with options to hide nonessential elements.</li>
+                                    <li><strong>Performance First:</strong> Designed to stay lightweight and fast, your browser won’t notice it’s there.</li>
+                                    <li><strong>Local-First Storage:</strong> All settings and data are stored locally, no cloud tracking, no data sharing.</li>
+                                </ul>
+                                <br />
+                                <h3>Productivity Features</h3>
+                                <p>
+                                    DashX brings together tools that help you get more done in less time:
+                                </p>
+                                <ul>
+                                    <li><strong>Focus Mode / Distraction Blocker:</strong> Mute or hide non-essential widgets, silence distractions, and stay in the zone.</li>
+                                    <li><strong>Smart Layouts & Widgets:</strong> Drag, drop, and resize widgets like weather, notes, to‑do lists, bookmarks, and more.</li>
+                                    <li><strong>Session Snapshot & Recovery:</strong> Save and restore tab sets or workspace states, so you never lose momentum.</li>
+                                </ul>
+                                <br />
+                                <h3>User Experience & Customization</h3>
+                                <p>
+                                    Every user is different - DashX respects that. You have full control over:
+                                </p>
+                                <ul>
+                                    <li>Theming, color schemes, fonts, and transparency settings</li>
+                                    <li>Which widgets appear (or stay hidden)</li>
+                                </ul>
+                                <br />
+                                <h3>Support & Feedback</h3>
+                                <p>
+                                    Your feedback is crucial to making DashX better. Found a bug or have a suggestion? Reach out anytime:
+                                </p>
+                                <ul>
+                                    <li>GitHub: <a href="https://github.com/chrome">GitHub Repository</a></li>
+                                    <li>Website / Contact: <a href="https://jeevadarshan.github.io">jeevadarshan.github.io</a></li>
+                                </ul>
+                                <br />
+                                <h3>Privacy & Security</h3>
+                                <p>
+                                    Privacy is built in not added later. DashX does not transmit or collect your personal data. Everything from your to-do items to your interface settings — remains stored securely in your browser.
+                                </p>
+                            </div>
+
+                            <h2>Reset Settings</h2>
+                            <hr />
+                            <br />
+                            <div style="flex-wrap:nowrap; flex-direction: row; width: 100%;" class="items">
+                                <p>Remove all saved data from your browser and reset all settings:</p>
+                                <br />
+                                <button id="reset-btn">Reset to Default</button>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--  JS  -->
+        <script src="utils/popup.js"></script>
+        <script src="utils/helper.js"></script>
+        <script src="utils/widget_loader.js"></script>
+        <script src="utils/addWidgetWizard.js"></script>
+        <script src="widgets/apps.js"></script>
+        <script src="widgets/settings.js"></script>
+        <script src="widgets/appDrawer.js"></script>
+        <script src="utils/analytics.js"></script>
+        <script src="libs/chart.min.js"></script>
+        <script src="libs/shepherd.min.js"></script>
+        <script src="utils/tour.js"></script>
+    </main>
+
+</body>
+</html>

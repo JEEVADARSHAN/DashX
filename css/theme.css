@@ -1,0 +1,23 @@
+/* ============ DEFAULT LIGHT THEME ========== */
+:root {
+    --background-color: #fcfcfc;
+    --font-color: #333333;
+    --accent-color: #2979ff;
+    --surface-color: #E6E6E690;
+    --layer: rgba(255, 255, 255, 0.3);
+    --box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+    --button-color: #f0f0f0;
+    --sidebar-color: #f4f4f4;
+}
+
+/* ========= DARK THEME ============ */
+[data-theme="dark"] {
+    --background-color: #1a1a1a;
+    --font-color: #f0f0f0;
+    --accent-color: #00b0ff;
+    --surface-color: rgba(0, 0, 0, 0.6);
+    --layer: rgba(255, 255, 255,0.1);
+    --box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1), 0 4px 6px rgba(255, 255, 255, 0.2);
+    --button-color: #3f3f3f;
+    --sidebar-color: #333333;
+}

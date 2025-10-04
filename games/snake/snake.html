@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake-Lite</title>
+    <link rel="icon" href="../../assets/game/snake.jpeg" type="image/png">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="snake.css">
+    <link rel="stylesheet" href="../../css/widgets.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Snake-Lite</h1>
+        <div class="game-info">
+            <div id="score">Score: 0</div>
+            <div id="how-to-play">
+                <h3>How to Play</h3>
+                <ul>
+                    <li style="text-align: start;">Use the arrow keys (← ↑ → ↓) to move the snake.</li>
+                    <li style="text-align: start;">When the snake eats food, it grows longer.</li>
+                    <li style="text-align: start;">Avoid running into the snake's own body!</li>
+                </ul>
+            </div>
+            <div id="controls">
+                <button id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        </div>
+        <div class="game-area">
+            <canvas id="game" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <script src="snake.js"></script>
+    <script src="../../utils/popup.js"></script>
+</body>
+</html>

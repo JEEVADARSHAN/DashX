@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Game</title>
+    <link rel="icon" href="../../assets/game/g2048.png" type="image/png">
+    <link rel="stylesheet" href="2048.css" />
+</head>
+<body>
+    <h1>2048</h1>
+    <div style="display: flex; justify-content: center">
+        <div id="score">Score: 0</div>
+        <button id="reset-button">Reset Game</button>
+    </div>
+    <br />
+
+    <div style="display:flex; flex-direction: row;">
+
+        <!-- Grid Display -->
+        <div class="grid" id="grid"></div>
+
+        <!-- How to Play Section -->
+        <div id="how-to-play">
+            <h3>How to Play</h3>
+            <ul>
+                <li style="text-align: start;">Use the arrow keys (← ↑ → ↓) to move.</li>
+                <li style="text-align: start;">Try to avoid ending up eating yourself</li>
+            </ul>
+            <p>The goal is to grow large by collecting food!</p>
+        </div>
+
+    </div>
+    
+    <script src="2048.js"></script>
+</body>
+</html>

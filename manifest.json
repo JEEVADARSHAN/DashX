@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Custom New Tab",
+  "version": "1.0",
+  "description": "DashX transforms your new tab into a customizable productivity dashboard with widgets, and various features. Built for focus, speed, and personalization.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage",
+    "scripting",
+    "bookmarks",
+    "system.memory",
+    "system.cpu"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "background": {
+    "service_worker": "utils/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [ "assets/icons/*.png" ],
+      "matches": [ "<all_urls>" ]
+    }
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/dashx/icon16.png",
+      "32": "assets/dashx/icon32.png",
+      "48": "assets/dashx/icon48.png",
+      "128": "assets/dashx/icon128.png"
+    },
+    "default_title": "New Tab"
+  },
+  "icons": {
+    "16": "assets/dashx/icon16.png",
+    "32": "assets/dashx/icon32.png",
+    "48": "assets/dashx/icon48.png",
+    "128": "assets/dashx/icon128.png"
+  }
+}
