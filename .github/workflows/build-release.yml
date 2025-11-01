@@ -3,7 +3,7 @@ name: Build and Release DashX
 on:
   push:
     tags:
-      - 'v*'
+      - 'V*'
 
 jobs:
   build:
