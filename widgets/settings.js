@@ -328,10 +328,17 @@
                     const cell = document.createElement('div');
                     cell.classList.add('widget-slot', 'edit-mode');
                     widgetArea.appendChild(cell);
+                    document.querySelectorAll('.widget').forEach(widget => {
+                        widget.classList.add('edit-mode');
+                    });
+
                 }
             } else {
                 docBar.style.pointerEvents = 'auto';
                 document.querySelectorAll('.widget-slot').forEach(slot => slot.remove());
+                document.querySelectorAll('.widget').forEach(widget => {
+                        widget.classList.remove('edit-mode');
+                    });
             }
 
             document.querySelectorAll(".close-btn").forEach(button => {

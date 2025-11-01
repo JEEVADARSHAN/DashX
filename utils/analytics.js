@@ -605,16 +605,19 @@ function renderLongestSessionsChart(usage) {
 
 
 // === Event Listeners ===
-document.getElementById('tracking-toggle').addEventListener('change', async e => {
-    checkbox = document.getElementById('tracking-toggle');
-    setInitialCheckboxState(checkbox);
+document.getElementById('tracking-toggle').addEventListener('change', async (e) => {
+    const enabled = e.target.checked;
+
     await chrome.storage.local.set({ trackingEnabled: enabled });
+
     if (!enabled) {
         await chrome.storage.local.remove(storageKey);
         usageData = null;
     }
+
     init();
 });
+
 
 document.getElementById('clear-data-btn').addEventListener('click', async () => {
     if (confirm('Clear all tracking data?')) {
