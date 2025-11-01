@@ -19,9 +19,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies (if needed)
-        run: npm install
-
       - name: Build ZIP for Chrome Extension
         run: |
           rm -f DashX.zip
